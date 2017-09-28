@@ -3,9 +3,9 @@
 using namespace std;
 int A(int n, int m)
 {
-	if(m==0) return n+1;
-	if(m>0 && n==0) return A(m-1,1);
-	if(m>0 && n>0) return A(m-1, A(m, n-1));
+	if(n==0) return m+1;
+	if(n>0 && m==0) return A(n-1,1);
+	if(m>0 && n>0) return A(n-1, A(n, m-1));
 }
 int main()
 {
