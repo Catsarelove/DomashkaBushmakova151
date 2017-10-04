@@ -4,7 +4,7 @@ struct quotient{
 	int numerator;
 	unsigned int denominator;
 	int d;
-} qqq;
+} l;
 
 int gcd(int a, int b)
 {
@@ -18,7 +18,6 @@ int gcd(int a, int b)
 }
 int main()
 {
-	quotient l;
 	cin>>l.numerator>>l.denominator;
 	if(l.denominator==1) cout<<l.numerator;
 	else
