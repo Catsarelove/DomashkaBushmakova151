@@ -3,18 +3,19 @@ using namespace std;
 struct quotient{
 	int numerator;
 	unsigned int denominator;
-	int d;
 } l;
 
 int gcd(int a, int b)
 {
-	while(a!=b)
+	int t;
+	while(a*b!=0)
 	{
-		if(a>b)
-		a=a-b;
-		else b=b-a;
+		a=a%b;
+		t=a;
+		a=b;
+		b=a;
 	}
-	return a;
+	return b;
 }
 int main()
 {
@@ -22,9 +23,9 @@ int main()
 	if(l.denominator==1) cout<<l.numerator;
 	else
 	{	
-			l.d=gcd( l.numerator, l.denominator);
-			l.numerator/=l.d;
-			l.denominator/=l.d;
+			int d=gcd( l.numerator, l.denominator);
+			l.numerator/=d;
+			l.denominator/=d;
 			if(l.denominator==1) cout<<l.numerator;
 			else
 				cout<<l.numerator<<'/'<<l.denominator; }
