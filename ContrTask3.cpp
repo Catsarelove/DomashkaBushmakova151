@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
 int min(int i, int j, int ni, int mj)
 {
@@ -21,7 +22,7 @@ int main()
 			a[i][j]=min(i, j, n-i-1, m-j-1);
 	for(int i = 0; i < n; i++){
 		for(int j = 0; j < m; j++)
-			cout << a[i][j] << ' ';
+			cout << setw(5) << a[i][j] << ' ';
 		cout << endl;
 	}
 	system ("pause");
