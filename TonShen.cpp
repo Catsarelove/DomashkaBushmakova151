@@ -11,14 +11,14 @@ bool prim(long long a)
 	bool flag = true;
 	if(a % 2 == 0) return false;
 	if (a<8) return true;
-	for(int i=3; i<pow(a,0.5) && flag; i++)
+	for(int i=3; i<=pow(a,0.5) && flag; i++)
 		if(a%i==0) flag=0; 
 	return flag;
 }
 long long prost(long long a)
 {
 	if(a % 2 == 0) return 2;
-	for(int i=3; i<pow(a,0.5); i+2)
+	for(int i=3; i<=pow(a,0.5); i+2)
 		if(prim(i) && a%i==0) return i;
 }
 int Legendre (long long m, long long p)
