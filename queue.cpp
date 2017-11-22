@@ -3,39 +3,41 @@ using namespace std;
 struct node{
 	int data;
 	node* next;
+	int pr;
 };
 struct queue{
 	node* tail;
-	void push1 (int new_data){
-		node * temp = tail;
-		temp->next=new node;
-		temp->next->data=new_data;
-		temp->next->next=NULL;
-	}
-	void push (int new_data){
-		node * temp = tail;
-		do{
-			temp=temp->next;
-		} while(temp->next!=NULL);
-		temp->next=new node;
-		temp->next->data=new_data;
-		temp->next->next=NULL;
+	void push (int new_data, int prio){
+		node * temp = new node;
+		temp->data=new_data;
+		temp->pr=prio;
+		node * paste = tail;
+		if(tail!= NULL){
+		while(tail->next!=NULL)
+			tail=tail->next;
+			tail->next=temp;
+			tail=paste;
+		}
+		else 
+			tail=temp;
+		    temp->next=NULL;
+
 	}
 	int pop(){
-		if(tail->next==NULL){
+		if(tail==NULL){
 			cout<<"OMG";
 			return 0;
 		}
-		node* temp = tail->next;
-		int temp_data=tail->next->data;
-		tail->next=temp->next;
+		node* temp = tail;
+		int temp_data=temp->data;
+		tail=temp->next;
 		delete temp;
 		return temp_data;	
 	}
 	~queue(){
-		while(tail->next!=NULL){
-			node* temp=tail->next;
-			tail->next=tail->next->next;
+		while(tail!=NULL){
+			node* temp=tail;
+			tail=tail->next;
 			delete temp;
 		}
 	}
@@ -43,10 +45,10 @@ struct queue{
 	int main(){
 
 		queue kuoe;
-		kuoe.tail = new node;
-		kuoe.push1(33);
-		kuoe.push(2);
-		kuoe.push(8);
+		kuoe.tail = NULL;
+		kuoe.push(33,2);
+		kuoe.push(2,1);
+		kuoe.push(8,3);
 		cout<<kuoe.pop()<<endl;
 		cout<<kuoe.pop()<<endl;
 		cout<<kuoe.pop()<<endl;
