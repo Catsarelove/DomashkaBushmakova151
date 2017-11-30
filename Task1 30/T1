@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+
+struct vetka{
+	int data;
+	vetka* left;
+	vetka* right;
+	vetka* parent;
+};
+struct three{
+	vetka* root;
+	vetka * place;
+	void push(int x){
+		if (root == NULL){
+			root = new vetka;
+			root->data = x;
+			root->left = NULL;
+			root->right = NULL;
+			root->parent = NULL;
+			place = root;
+		}
+		else{
+			if (place->right == NULL)
+			{
+				place->right = new vetka;
+				place->right->data = x;
+				place->right->parent = place;
+				place->right->left = NULL;
+				if (place->right->data < place->data) swap(place->right, place);
+				place->right->right = NULL;
+			}
+			else
+				if (place->left == NULL)
+				{
+					place->left = new vetka;
+					place->left->data = x;
+					place->left->parent = place;
+					place->left->left = NULL;
+					place->left->right = NULL;
+					if (place->left->data > place->data) swap(place->left, place);
+					if (place->left->data < place->right->data) swap(place->left, place->right);
+					if (place != root && place->parent->left != place) place = place->parent->left;
+					else place = place->right;
+				}
+
+		}
+	}
+		void swap(vetka * x, vetka* y){
+			int t;
+			t = x->data;
+			x->data = y->data;
+			y->data = t;
+		}
+
+	bool find(int x, vetka* t){
+		if (t->data == x) return true;
+		if (t->right != NULL && t->data < x) find(x, t->right);
+		if (t->left != NULL && t->data > x) find(x, t->left);
+		return false;
+	}
+	
+};
+int main(){
+	three t;
+	t.root = NULL;
+	int n;
+	cin >> n;
+	int x;
+	for (int i = 0; i < n; i++){
+		cin >> x;
+		t.push(x);
+	}
+	cin >> x;
+	cout<<t.find(x, t.root);
+	system("pause");
+	return 0;
+}
