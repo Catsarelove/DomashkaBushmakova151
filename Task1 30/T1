@@ -37,7 +37,7 @@ struct three{
 					place->left->parent = place;
 					place->left->left = NULL;
 					place->left->right = NULL;
-					if (place->left->data > place->data) swap(place->left, place);
+					if (place->left->data < place->data) swap(place->left, place);
 					if (place->left->data < place->right->data) swap(place->left, place->right);
 					if (place != root && place->parent->left != place) place = place->parent->left;
 					else place = place->right;
@@ -54,8 +54,8 @@ struct three{
 
 	bool find(int x, vetka* t){
 		if (t->data == x) return true;
-		if (t->right != NULL && t->data < x) find(x, t->right);
-		if (t->left != NULL && t->data > x) find(x, t->left);
+		if (t->right != NULL && t->data > x) find(x, t->right);
+		if (t->left != NULL && t->data < x) find(x, t->left);
 		return false;
 	}
 	
