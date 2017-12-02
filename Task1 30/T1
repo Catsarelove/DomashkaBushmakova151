@@ -26,7 +26,7 @@ struct three{
 				place->right->data = x;
 				place->right->parent = place;
 				place->right->left = NULL;
-				if (place->right->data < place->data) swap(place->right, place);
+				if (place->right->data > place->data) swap(place->right, place);
 				place->right->right = NULL;
 			}
 			else
