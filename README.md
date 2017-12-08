@@ -6,8 +6,7 @@ Just trying to do my homework. Askew.
 
          /\_/\
     ____/ o o \
-  /~____  =ø= /
- (______)__m_m)
+
 
  
  
