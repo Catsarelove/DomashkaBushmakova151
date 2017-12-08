@@ -10,11 +10,5 @@ Just trying to do my homework. Askew.
  (______)__m_m)
  
  
- ((      /|_/|
-  \\.._.'  , ,\
-  /\ | '.__ v / 
- (_ .   /   "         (http://www.chris.com/)
-  ) _)._  _ /
- '.\ \|( / ( mrf
-   '' ''\\ \\
+
    
