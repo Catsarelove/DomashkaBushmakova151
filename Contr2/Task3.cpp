@@ -58,6 +58,7 @@ int main() {
 			min = l[i];
 		}
 	}
+	delete [] l;
 	system("pause");
 	return 0;
 }
