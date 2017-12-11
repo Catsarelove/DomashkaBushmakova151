@@ -6,7 +6,7 @@ int cubeee(int x, int & mini) {
 		return 0;
 	}
 	double a = (double)pow(x - 1, (1. / 2));
-	if (a - (int)a == 0) {
+	if (abs(a - (round)a) < 0.0001) {
 		return 1;
 		mini = x;
 	}
