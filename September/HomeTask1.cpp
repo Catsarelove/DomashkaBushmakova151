@@ -16,7 +16,7 @@ int main()
 				cout<<'\n';
 		}
 	
-	delete [n*m] a;
+	delete [] a;
 	system("pause");
 	return 0;
 }
