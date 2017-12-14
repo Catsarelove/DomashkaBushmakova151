@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-struct string {
+typedef struct str1{
 	int length;
 	char* s;
 	void read() {
@@ -9,20 +9,20 @@ struct string {
 	}
 	void write() {
 		for (int i = 0; i<length;i++)
-			cout<< (s[i]);
+			cout << (s[i]);
 	}
-	~string() {
+	~str1() {
 		delete[]s;
 	}
-}str;
+} str1;
 
 int main()
 {
+	 str1 str;
 	cin >> str.length;
 	str.s = new char[str.length];
 	str.read();
 	str.write();
-	str.~string();
 	system("pause");
 	return 0;
 }
