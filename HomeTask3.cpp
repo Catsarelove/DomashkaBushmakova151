@@ -30,6 +30,7 @@ int main()
 	}
 	for(int i=0; i<n; i++)
 		cout<<*(a+i);
+	delete [] a;
 	system("pause");
 	return 0;
 }
