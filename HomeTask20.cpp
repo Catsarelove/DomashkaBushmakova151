@@ -14,7 +14,7 @@ void svap(node* a, node* b) {
 }
 struct heap {
 	node* root;
-	void push(int* a, int n){
+	void push(int* a, int n) {
 		root = new node;
 		root->data = a[0];
 		root->parent = NULL;
@@ -23,7 +23,7 @@ struct heap {
 	}
 	void heapify(node* x) {
 		node* temp = x;
-		while (temp->parent != NULL && temp->parent->data < temp->data ) {
+		while (temp->parent != NULL && temp->parent->data < temp->data) {
 			svap(temp, temp->parent);
 			temp = temp->parent;
 		}
@@ -42,7 +42,7 @@ struct heap {
 		if ((2 * i + 2) < n) {
 			temp->left = new node;
 			temp->left->data = a[2 * i + 2];
-		    temp->left->parent = temp;
+			temp->left->parent = temp;
 			if (temp->left->data > temp->data) {
 				heapify(temp->left);
 			}
@@ -54,11 +54,11 @@ struct heap {
 		int x = root->data;
 		node* temp = root;
 		node* t;
-		if (root->left!=NULL && (root->right==NULL || root->left->data > root->right->data))
+		if (root->left != NULL && (root->right == NULL || root->left->data > root->right->data))
 			t = root->left;
 		else
 			t = root->right;
-		while (t!= NULL) {
+		while (t != NULL) {
 			svap(temp, t);
 			temp = t;
 			if (t->right == NULL && t->left == NULL)
@@ -112,15 +112,6 @@ struct heap {
 				else root = paste;
 				delete e;
 			}
-			else {
-				node* temp = e;
-				do {
-					if(temp->left!=NULL)
-					svap(temp, temp->left);
-					temp = temp->left;
-				} while (temp->left != NULL);
-				erase(temp);
-			}
 		}
 	}
 	~heap() {
@@ -139,7 +130,7 @@ int main() {
 	heapo.push(a, n);
 	heapo.heapsort(a, n);
 	for (int i = 0; i < n; i++)
-		cout << a[i] <<"  ";
+		cout << a[i] << "  ";
 	system("pause");
 	return 0;
 }
