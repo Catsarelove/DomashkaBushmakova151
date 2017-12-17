@@ -135,4 +135,3 @@ int main() {
 	cout << t.sum;
 	system("pause");
 	return 0;
-}
