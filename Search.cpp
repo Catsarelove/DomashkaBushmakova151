@@ -7,7 +7,7 @@ struct vetka {
 	vetka* right;
 	vetka* parent;
 };
-struct three {
+struct tree {
 	vetka* root;
 	vetka * place;
 	void push(int x) {
@@ -78,14 +78,14 @@ struct three {
 			if (temp->right != NULL) del(temp->right);
 		}
 	}
-	~three() {
+	~tree() {
 		while (root != NULL)
 			del(root);
 	}
 
 };
 int main() {
-	three t;
+	tree t;
 	t.root = NULL;
 	int n;
 	cin >> n;
@@ -99,7 +99,6 @@ int main() {
 		cout << "found";
 	else
 		cout << "not found";
-	t.~three();
 	system("pause");
 	return 0;
 }
