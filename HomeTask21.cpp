@@ -72,6 +72,7 @@ struct three {
 				else
 					e->parent->right = NULL;
 			}
+			else root=NULL;
 			delete e;
 		}
 		else {
