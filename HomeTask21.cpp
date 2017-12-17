@@ -7,7 +7,7 @@ struct vetka {
 	vetka* right;
 	vetka* parent;
 };
-struct three {
+struct tree {
 	vetka* root;
 	vetka * place;
 	int sum = 0;
@@ -104,14 +104,14 @@ struct three {
 			}
 		}
 	}
-	~three() {
+	~tree() {
 		while (root != NULL)
 			erase(root);
 	}
 
 };
 int main() {
-	three t;
+	tree t;
 	t.root = NULL;
 	int n, x;
 	cin >> n;
