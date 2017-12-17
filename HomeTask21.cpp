@@ -9,7 +9,8 @@ struct vetka {
 };
 struct three {
 	vetka* root;
-	int sum=0;
+	vetka * place;
+	int sum = 0;
 	void push(int x) {
 		sum += x;
 		if (root == NULL) {
@@ -18,6 +19,7 @@ struct three {
 			root->left = NULL;
 			root->right = NULL;
 			root->parent = NULL;
+			place = root;
 		}
 		else taba(root, x);
 	}
@@ -70,15 +72,15 @@ struct three {
 				else
 					e->parent->right = NULL;
 			}
-			else root=NULL;
+			else root = NULL;
 			delete e;
 		}
 		else {
-			if (e->left == NULL || right==NULL) {
+			if (e->left == NULL || right == NULL) {
 				vetka* paste;
-				if (e->left == NULL) 
+				if (e->left == NULL)
 					paste = e->left;
-				else 
+				else
 					paste = e->right;
 				if (e != root) {
 					if (e->parent->left == e)
@@ -87,13 +89,19 @@ struct three {
 						e->parent->right = paste;
 				}
 				else root = paste;
+				delete e;
 			}
 			else {
 				vetka* temp = e;
+				vetka* t=e->left;
 				do {
-					svap(temp, temp->left);
-					temp = temp->left;
-				} while (temp->left != NULL);
+					if(t->right!=NULL)
+					t = t->right;
+					svap(temp, t);
+					temp = t;
+					if (t->right == NULL) t = t->left;
+				} while (t!=NULL && t->left != NULL && t->right!=NULL);
+				sum += temp->data;
 				erase(temp);
 			}
 		}
@@ -107,7 +115,7 @@ struct three {
 int main() {
 	three t;
 	t.root = NULL;
-	int n,x;
+	int n, x;
 	cin >> n;
 	for (int i = 0; i < n; i++) {
 		cin >> x;
@@ -117,14 +125,14 @@ int main() {
 	int m;
 	cin >> m;
 	for (int i = 0; i < m; i++) {
-	cin >> x;
-	vetka* f = t.find(x, t.root);
-	if (f != NULL) {
-		cout << "found";
-		t.erase(f);
-	}
-	else
-		cout << "not found";
+		cin >> x;
+		vetka* f = t.find(x, t.root);
+		if (f != NULL) {
+			cout << "found";
+			t.erase(f);
+		}
+		else
+			cout << "not found";
 	}
 	cout << t.sum;
 	system("pause");
