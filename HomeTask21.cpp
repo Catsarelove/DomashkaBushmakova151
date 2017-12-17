@@ -9,7 +9,6 @@ struct vetka {
 };
 struct three {
 	vetka* root;
-	vetka * place;
 	int sum=0;
 	void push(int x) {
 		sum += x;
@@ -19,7 +18,6 @@ struct three {
 			root->left = NULL;
 			root->right = NULL;
 			root->parent = NULL;
-			place = root;
 		}
 		else taba(root, x);
 	}
