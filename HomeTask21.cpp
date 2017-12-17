@@ -79,9 +79,10 @@ struct three {
 			if (e->left == NULL || right == NULL) {
 				vetka* paste;
 				if (e->left == NULL)
-					paste = e->left;
-				else
 					paste = e->right;
+				else
+					paste = e->left;
+				paste->parent = e->parent;
 				if (e != root) {
 					if (e->parent->left == e)
 						e->parent->left = paste;
@@ -94,15 +95,12 @@ struct three {
 			else {
 				vetka* temp = e;
 				vetka* t=e->left;
-				do {
-					if(t->right!=NULL)
-					t = t->right;
-					svap(temp, t);
-					temp = t;
-					if (t->right == NULL) t = t->left;
-				} while (t!=NULL && t->left != NULL && t->right!=NULL);
-				sum += temp->data;
-				erase(temp);
+				while (t->right != NULL) {
+						t = t->right;
+				     }
+				svap(temp, t);
+				sum += t->data;
+				erase(t);
 			}
 		}
 	}
