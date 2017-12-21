@@ -1,19 +1,25 @@
 #include <iostream>
 using namespace std;
-int path(int n, int k)
+int path(int* a, int n, int k)
 {
-	if (n == 1) return 1;
-	int s = 0;
-	for (int i = 0; i<k; i++)
-		if (n - k + 1>0)
-			s += path(n - k + i, k);
-	return s;
+	a[0] = 1;
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= i && j <= k; j++)
+			a[i] += a[i - j];
+
+	}
+	return a[n - 1];
 }
 int main()
 {
-	int x, k;
-	cin >> x >> k;
-	cout << path(x,k) << endl;
+	int n, k;
+	int* a;
+	cin >> n >> k;
+	a = new int[n];
+	for (int i = 0; i < n; i++) {
+		a[i] = 0;
+	}
+	cout << path(a, n, k) << endl;
 	system("pause");
 	return 0;
 }
