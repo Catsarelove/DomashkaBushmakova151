@@ -1,0 +1,19 @@
+﻿myProg1: Source.o Source1.o Source2.o
+
+	g++ Source.o Source1.o Source2.o -o myProg1 
+
+Source.o: Header1.h Source.cpp
+	
+	g++ -c -Wall Source.cpp
+
+Source1.o: Header1.h Source1.cpp
+
+	g++ -c -Wall Source1.cpp
+
+Source2.o: Header1.h Source2.cpp
+	
+	g++ -c -Wall Source2.cpp
+
+clean:                               
+	
+	rm -f myProg1 *.o
