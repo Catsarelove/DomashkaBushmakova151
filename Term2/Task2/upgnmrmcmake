@@ -1,0 +1,6 @@
+Gauss: upgnmrmc.o
+	g++ upgnmrmc.o -o Gauss
+Source.o: upgnmrmcHeader.h upgnmrmc.cpp 
+	g++ -c upgnmrmc.cpp
+clean:
+	rm -f Gauss*.o
