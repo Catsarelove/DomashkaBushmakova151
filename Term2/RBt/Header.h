@@ -298,7 +298,7 @@ struct RBt {
 				delete e;
 			}
 			else {
-				if (e->left == NULL || right == NULL) {
+				if (e->left == NULL || e->right == NULL) {
 					if (e->color && e != root) aftercheck(e);
 					node* paste;
 					if (e->left == NULL)
