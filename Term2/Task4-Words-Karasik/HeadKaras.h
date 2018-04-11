@@ -70,12 +70,13 @@ void fill(mymap& Voc, ifstream & f) {
 	while (!f.eof()) {
 		f >> word;
 		cheat(word);
-		I = Voc.find(word);
-		if (I != Voc.end())
-			Voc[word]++;
-		else
-			Voc[word] = 1;
-
+	if (word != "") {
+			I = Voc.find(word);
+			if (I != Voc.end())
+				Voc[word]++;
+			else
+				Voc[word] = 1;
+		}
 	}
 }
 void findinfile(ifstream &f, string word) {
