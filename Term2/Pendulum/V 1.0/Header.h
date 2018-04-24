@@ -1,3 +1,4 @@
+//#define _USE_MATH_DEFINES
 #include <cmath>
 #include <iostream>
 #include <string>
@@ -14,21 +15,19 @@ double I(int, float);
 class SimpleMathPendulum {
 protected:	
 	double x0; // начальная координата
+	double v0; //начальная скорость
 	double m; //масса маятника
 	double l; //длина подвеса
 	double A; //амплитуда
 	double a; //угол начального отклонения
 	double T; //период колебаний
 	double w; //част ота колебаний
-	void def(double x0) {
+	void def() {
 		T = 2 * pi*pow(l / g, 0.5);
 		if (a <= 1) PrT(1);
 		w = pow(g / l, 0.5);
-		if (sin(a)) {
-			A = x0 / sin(a);
-		}
-		else
-			A = 0;
+		A = pow((x0*x0 + (v0 / w)*(v0 / w)), 0.5);
+		a = atan(x0*w / v0);
 	}
 public:
 	SimpleMathPendulum() { ; }
@@ -39,19 +38,18 @@ public:
 	//	cin >> m;
 	//	cout << "Длина подвеса: \n";
 	//	cin >> l;
-	//	cout << "Угол отклонения \n";
-	//	cin >> a;
-	//	def(x0);
+	//	cout << "Начальная скорость \n";
+	//	cin >> v0;
+	//	def();
 	//}
 	//а можно как-то сделать, чтобы при создании физического маятника, 
 	//вызывался не этот конструктор, а тот, который с параметром? Или объединить cin и fstream, или выкинуть cin?
     SimpleMathPendulum(ifstream & f1) {
-	double x0;
 	f1 >> x0;
 	f1 >> m;
 	f1 >> l;
-	f1 >> a;
-	def(x0);
+	f1 >> v0;
+	def();
 }
 	void PrT(int n) {
 		T = T*I(n, a);
@@ -75,7 +73,6 @@ class PendulumWFrict {
 	double T;
 	double w0;
 	double x0;
-	double v0;
 	double c;
 	double k;
 	ft xt;
@@ -97,8 +94,8 @@ public:
 		cin >> m;
 		cout << "Длина подвеса: \n";
 		cin >> l;
-		cout << "Начальная скорость \n";
-		cin >> v0;
+		cout << "Угол отклонения \n";
+		cin >> a;
 		cout << "Вязкость \n";
 		cin >> k;
 		def();
@@ -107,12 +104,12 @@ public:
 		f1 >> x0;
 		f1 >> m;
 		f1 >> l;
-		f1 >> v0;
+		f1 >> a;
 		f1 >> k;
 		def();
 	}
 	double x(double t) {
-		return xt(t, c, v0, w0, x0);
+		return xt(t, c, a, w0, x0);
 	}
 };
 typedef enum {ball, cube, cilinder, disk} form;
@@ -123,15 +120,12 @@ class PhPendulum: public SimpleMathPendulum {
 	double r; //радиус шара, радиус цилиндра, сторона куба, малый радиус диска
 	double J;// момент импульса
 	double L;//приведенная длина
-	void def(double x0) {
+	void def() {
 		L = l + r + J / ((l + r)*m);
-		T = 2 * pi*pow(l / g, 0.5);
-		w = pow(g / l, 0.5);
-		if (sin(a)) {
-			A = x0 / sin(a);
-		}
-		else
-			A = 0;
+		T = 2 * pi*pow(L / g, 0.5);
+		w = pow(g / L, 0.5);
+		A = pow((x0*x0 + (v0 / w)*(v0 / w)), 0.5);
+		a = atan(x0*w / v0);
 	}
 public:	PhPendulum() {
 	    cout << "Начальная координата: \n";
@@ -140,8 +134,8 @@ public:	PhPendulum() {
 		cin >> m;
 		cout << "Длина подвеса: \n";
 		cin >> l;
-		cout << "Угол отклонения \n";
-		cin >> a;
+		cout << "Начальная скорость \n";
+		cin >> v0;
 		cout << "Форма: \n";
 		getform(f);
 		if (f == ball) {
@@ -164,14 +158,13 @@ public:	PhPendulum() {
 			cin >> r;
 			J = m*r*r / 4;
 		}
-		def(x0);		
+		def();		
 	}
 	PhPendulum(ifstream & f1) {
-		double x0;
 		f1 >> x0;
 		f1 >> m;
 		f1 >> l;
-		f1 >> a;
+		f1 >> v0;
 		getform(f, f1);
 		if (f == ball) {
 			f1 >> r;
@@ -189,7 +182,7 @@ public:	PhPendulum() {
 			f1 >> r;
 			J = m*r*r / 4;
 		}
-		def(x0);
+		def();
 	}
 };
 void output(ofstream &, ifstream &);
