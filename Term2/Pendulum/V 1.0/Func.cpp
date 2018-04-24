@@ -25,7 +25,7 @@ double x1(double t, double c, double v0, double w0, double x0) {
 	double w = pow(w0*w0 - c*c, 0.5);
 	A = pow((x0*x0 + (v0 / w0)*(v0/w0)), 0.5);
 	double a = atan(x0*w0 / v0);
-	return A*exp(-c*t)*cos(w*t + a);
+	return A*exp(-c*t)*sin(w*t + a);
 }
 double x2(double t, double c, double v0, double w0, double x0) {
 
