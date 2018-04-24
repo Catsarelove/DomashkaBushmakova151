@@ -23,12 +23,8 @@ void Foucault(double l, double f, double v0, double t, double & tt, double & p) 
 double x1(double t, double c, double v0, double w0, double x0) {
 	double A;
 	double w = pow(w0*w0 - c*c, 0.5);
-	double a = atan(-(v0 + c) / (w*x0));
-	if (sin(a)) {
-		A = x0 / sin(a);
-	}
-	else
-		A = 0;
+	A = pow((x0*x0 + (v0 / w0)*(v0/w0)), 0.5);
+	double a = atan(x0*w0 / v0);
 	return A*exp(-c*t)*cos(w*t + a);
 }
 double x2(double t, double c, double v0, double w0, double x0) {
