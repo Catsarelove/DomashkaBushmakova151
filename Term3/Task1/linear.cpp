@@ -51,4 +51,6 @@ if (xr && !inf && !none) cout << "x belongs to R \r";
 if (!xr && !inf && !none) cout << "x = " << x << "\r";
 if (yr && !inf && !none) cout << "y belongs to R \r";
 if (!yr && !inf && !none) cout << "y = " << y << "\r";
+return 0;
+}
  
