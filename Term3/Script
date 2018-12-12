@@ -1,0 +1,16 @@
+# !/bin/bash
+g++ -std=gnu++17 HW2.cpp -o HW2
+exec 6>&1
+exec 7<&0
+for ((n=1; n<=8; n++))
+do
+exec 0<test1/$[n]_test_in.txt
+exec 1>test1/$[n]_test_out.txt
+./HW2 
+exec 1>&6
+exec 0<&7
+if cmp -s test1/$[n]_test_res.txt test1/$[n]_test_out.txt ; then
+        echo $[n] тест пройден
+        else echo $[n] тест не пройден
+fi
+done
