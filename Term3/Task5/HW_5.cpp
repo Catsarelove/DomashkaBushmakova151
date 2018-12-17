@@ -7,6 +7,9 @@ class A {
 	T data;
 public:
 	A(){}
+	A(const A &other){
+		data = other.data;
+	}
 	A operator =(const T & x){
 		if(!is_lock_free) throw LockedErr();
 		m.lock();
