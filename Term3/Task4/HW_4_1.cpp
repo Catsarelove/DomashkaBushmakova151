@@ -1,43 +1,29 @@
 #include <thread>
 #include <iostream>
 #include <stdio.h>
-#include <mutex>
+#include <chrono>
+#include <mutex> 
 using namespace std;
 mutex m;
-void Sort(int* arr, int n) 
-{
-  if(n > 1){
-    int size = n;
-    for(int i = 1; i < size; ++i){
-      int j = i - 1;
-      m.lock();
-      int key = arr[i];
-      while(j >= 0 && arr[j] > key){
-        arr[j+1] = arr[j];
-        --j;
-      }
-      arr[j+1] = key;
-      m.unlock();
-    }
-  }
-}  
+void foo(int & a, int & b){
+	int c;	
+	for(int i = 0; i <= 3; i++){
+		m.lock();
+		c = a;
+		this_thread::sleep_for(chrono::seconds(rand()%4));
+		a = b;
+		b = c;
+		m.unlock();
+	}
+}     
 int main(){
-	int* a;
-	int n = 12000;
-	a = new int[n];
-	for(int i = 0; i< n; i++)
-		a[i] = rand()%200 - 100;
-	thread t1(Sort, a, n);
-	thread t2(Sort, a, n);
+    int a = 66;
+    int b = 77;
+	thread t1(foo, ref(a),ref(b));
+	thread t2(foo, ref(a),ref(b));
 	t1.join();
 	t2.join();
-	bool flag = true;
-	for(int i = 0; i< (n - 1) && flag; i++){
-		if(a[i]>a[i+1]){
-			cout << "AAAA";
-			flag = false;
-		}
-	}
-	delete [] a;
+	printf("a = %d, b = %d\n", a, b);
+	printf("The right answer is a = 66, b = 77\n");
 	return 0;
 }
