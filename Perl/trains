@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use 5.010; 
+use DBI;
+sub printd{
+	my $sth = shift;
+	$sth->execute();
+	while (my @row = $sth->fetchrow_array) {
+		foreach my $n (@row) {
+  			say $n;
+		}	
+	}
+}
+my ($train, $mm1, $mm2, $yy1, $yy2) = (666, 2, 4, 18, 19);
+my $route = 12;
+my $st = "LENTA";
+my $dbfile = "trains.db";
+ 
+my $dsn      = "dbi:SQLite:dbname=$dbfile";
+my $user     = "";
+my $password = "";
+my $dbh = DBI->connect($dsn, $user, $password, {
+   PrintError       => 0,
+   RaiseError       => 1,
+   AutoCommit       => 1,
+   FetchHashKeyName => 'NAME_lc',
+});
+
+say "Passengers of train $train from 0$mm1.$yy1 to 0$mm2.$yy2:";
+my $sth1 = $dbh->prepare("SELECT name from Passengers where tic_id in(SELECT tic_id from Tickets where train == $train and (yy >= $yy1 and yy <= $yy2) and (mm >= $mm1 and mm <= $mm2))");
+printd($sth1);
+
+say "Number of journeys on the route $route:";
+my $sth2 = $dbh->prepare("SELECT count(train) from Trains where route_id == $route");
+printd($sth2);
+ 
+say "All trains from $st:";
+my $sth3 = $dbh->prepare(qq(SELECT train from Stations where station == "$st"));
+printd($sth3);
+$dbh->disconnect;
